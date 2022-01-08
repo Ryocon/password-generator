@@ -14,10 +14,17 @@ var upperCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 var numberCharacters = "0123456789"
 
 // blank variable for new password
-var newPassword = ""
+var password = ""
 
-// 
-var passwordLength = parseInt(prompt("How many characters between 8-128 would you like?"), 8) 
+var possibleChars = []
+
+var guaranteedChars = []
+
+
+// var passwordLength = parseInt(prompt("How many characters between 8-128 would you like?"), 8) 
+var passwordLength = prompt("How many characters between 8-128 would you like?")
+
+var passwordLengthInt = parseInt(passwordLength)
 
 debugger
 
@@ -33,7 +40,7 @@ if (passwordLength < 8 || passwordLength > 128) {
 
 var hasSpecialChar = confirm("Would you like special characters?")
 
-var hasLowerCase = confirm("Would you like numbers?")
+var hasLowerCase = confirm("Would you like lower case?")
 
 var hasUpperCase = confirm("Would you like upper case?")
 
@@ -45,59 +52,67 @@ if(!hasSpecialChar && !hasLowerCase && !hasUpperCase && !hasNumbers) {
 }
 
 
-function hasSpecialChar() {
-    return specialCharacters[Math.floor(Math.random() * specialCharacters.length)]
-}
+// function hasSpecialChar() {
+//     // return specialCharacters[Math.floor(Math.random() * specialCharacters.length)]
+//     guaranteedCharacters.push(Math.floor(Math.random() * specialCharacters.length))
+// }
 
-function hasLowerCase() {
-    return lowerCharacters[Math.floor(Math.random() * lowerCharacters.length)]
-}
+// function hasLowerCase() {
+//     // return lowerCharacters[Math.floor(Math.random() * lowerCharacters.length)]
+//     guaranteedCharacters.push(Math.floor(Math.random() * lowerCharacters.length))
+// }
 
-function hasUpperCase() {
-    return upperCharacters[Math.floor(Math.random() * upperCharacters.length)]
-}
+// function hasUpperCase() {
+//     // return upperCharacters[Math.floor(Math.random() * upperCharacters.length)]
+//     guaranteedCharacters.push(Math.floor(Math.random() * upperCharacters.length))
+// }
 
-function hasNumbers() {
-    return numberCharacters[Math.floor(Math.random() * numberCharacters.length)]
-}
+// function hasNumbers() {
+//     // return numberCharacters[Math.floor(Math.random() * numberCharacters.length)]
+//     guaranteedCharacters.push(Math.floor(Math.random() * numberCharacters.length))
+// }
 
 if (hasSpecialChar) {
-    // var randomSpecialChar = includeSpecialChar()
-    newPassword += specialCharacters
+    possibleChars = possibleChars.concat(specialCharacters)
+    var randIndex = Math.floor(Math.random() * specialCharacters.length)
+    var randElement = specialCharacters[randIndex]
 } 
 
 if (hasLowerCase) {
-    // var randomLowerCase = includeLowerCase()
-    newPassword += lowerCharacters
+    possibleChars = possibleChars.concat(lowerCharacters)
+    var randIndex = Math.floor(Math.random() * lowerCharacters.length)
+    var randElement = lowerCharacters[randIndex]
 }
 
 if (hasUpperCase) {
-    // var randomUpperCase = includeUpperCase()
-    newPassword += upperCharacters
+    possibleChars = possibleChars.concat(upperCharacters)
+    var randIndex = Math.floor(Math.random() * upperCharacters.length)
+    var randElement = upperCharacters[randIndex]
 }
 
 if (hasNumbers) {
-    // var randomNumber = includeNumber()
-    newPassword += numberCharacters
+    possibleChars = possibleChars.concat(numberCharacters)
+    var randIndex = Math.floor(Math.random() * numberCharacters.length)
+    var randElement = numberCharacters[randIndex]
 }
 
+guaranteedChars.push(randElement)
 
-for(i = newPassword.length; i < passwordLength; i++) {
 
-    newPassword += newPassword[Math.floor(Math.random() * newPassword.length)]
+
+for(i = guaranteedChars.length; i < passwordLengthInt; i++) {
+
+    password += randIndex[Math.floor(Math.random() * passwordLengthInt.length)]
 }
 
-passwordText.value = newPassword
-
 }
+
 
 // Write password to the #password input
-// function writePassword() {
-//   var password = generatePassword();
-  
-  
-
-// }
+function writePassword() {
+  var password = generatePassword()
+  passwordText.value = password
+}
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", generatePassword)
