@@ -7,6 +7,9 @@ function generatePassword() {
 // variables set for each possible selection of characters for use in the password
 var specialCharacters = " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
 
+// to see what special characters generated
+console.log(specialCharacters)
+
 var lowerCharacters = "abcdefghijklmnopqrstuvwxyz"
 
 var upperCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -51,6 +54,7 @@ var hasNumbers = confirm("Would you like numbers?")
 // used to make sure a user has selected at least one of the available options
 if(!hasSpecialChar && !hasLowerCase && !hasUpperCase && !hasNumbers) {
     alert("Please pick at least one of the options")
+    return null
 }
 
 // if statement block used to concatonate/add possible characters for the users password
