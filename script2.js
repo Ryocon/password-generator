@@ -18,9 +18,9 @@ var newPassword = ''
 
 var passwordLength = parseInt(prompt("How many characters between 8-128 would you like?"), 8) 
 
-confirm("Special character?")
+debugger
 
-if (Number.isNaN(passwordLength)) {
+if (Number.isNaN(passwordLength.value)) {
     alert("Pick a number please!");
     return null
 }
@@ -29,6 +29,7 @@ if (passwordLength < 8 || passwordLength > 128) {
     alert("Pick a number between 8-128, please")
 }
 
+confirm("Special character?")
 
 
 var hasSymbol= confirm(
