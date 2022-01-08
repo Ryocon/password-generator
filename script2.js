@@ -16,13 +16,12 @@ var numberCharacters = "0123456789"
 // blank variable for new password
 var password = ""
 
-var possibleChars = []
-
-var guaranteedChars = []
+var possibleChars = ""
 
 
 // var passwordLength = parseInt(prompt("How many characters between 8-128 would you like?"), 8) 
 var passwordLength = prompt("How many characters between 8-128 would you like?")
+
 
 var passwordLengthInt = parseInt(passwordLength)
 
@@ -51,6 +50,7 @@ if(!hasSpecialChar && !hasLowerCase && !hasUpperCase && !hasNumbers) {
     alert("Please pick at least one of the options")
 }
 
+console.log(possibleChars)
 
 // function hasSpecialChar() {
 //     // return specialCharacters[Math.floor(Math.random() * specialCharacters.length)]
@@ -96,11 +96,10 @@ if (hasNumbers) {
     var randElement = numberCharacters[randIndex]
 }
 
-guaranteedChars.push(randElement)
 
 
 
-for(i = guaranteedChars.length; i < passwordLengthInt; i++) {
+for(var i = 0; i < passwordLengthInt; i++) {
 
     password += randIndex[Math.floor(Math.random() * passwordLengthInt.length)]
 }
@@ -111,6 +110,7 @@ for(i = guaranteedChars.length; i < passwordLengthInt; i++) {
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword()
+  var passwordText = document.querySelector("#password")
   passwordText.value = password
 }
 

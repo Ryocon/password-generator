@@ -1,7 +1,11 @@
 // Assignment Code
 var generateBtn = document.querySelector("#generate");
 
-var specialCharacters = "!@#$%^&*()"
+
+function generatePassword() {
+
+// variables set for each possible selection of characters for use in the password
+var specialCharacters = " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
 
 var lowerCharacters = "abcdefghijklmnopqrstuvwxyz"
 
@@ -9,7 +13,70 @@ var upperCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 var numberCharacters = "0123456789"
 
+// blank variable for new password
+var password = ""
+
+// blank variable to compile possible password options within
+var possibleChars = ""
+
+// first prompt to get user input on password length
+var passwordLength = prompt("How many characters between 8-128 would you like?")
+
+// password is parsed into an integer from a string
+var passwordLength = parseInt(passwordLength)
+
 debugger
+
+// used to check if user input is an integer (although it doesn't always seem to work!)
+if (Number.isNaN(passwordLength.value)) {
+    alert("Pick a number please!")
+    return null
+}
+
+// used to check if the parameters of password length is correct through the user input
+if (passwordLength < 8 || passwordLength > 128) {
+    alert("Pick a number between 8-128, please")
+    return null
+}
+
+// confirms for true or false on the users preference for their password
+var hasSpecialChar = confirm("Would you like special characters?")
+
+var hasLowerCase = confirm("Would you like lower case?")
+
+var hasUpperCase = confirm("Would you like upper case?")
+
+var hasNumbers = confirm("Would you like numbers?")
+
+// used to make sure a user has selected at least one of the available options
+if(!hasSpecialChar && !hasLowerCase && !hasUpperCase && !hasNumbers) {
+    alert("Please pick at least one of the options")
+}
+
+// if statement block used to concatonate/add possible characters for the users password
+if (hasSpecialChar) {
+  possibleChars += specialCharacters
+}
+
+if (hasLowerCase) {
+  possibleChars += lowerCharacters
+}
+
+if (hasUpperCase) {
+  possibleChars += upperCharacters
+}
+
+if (hasNumbers) {
+  possibleChars += numberCharacters
+}
+
+// for loop using random assignment from the possible options and the users selected password length to generate an appropriate password
+for (var i = 0; i < passwordLength; i++) {
+  password += possibleChars[Math.floor(Math.random() * possibleChars.length)]
+}
+
+return password
+}
 
 // Write password to the #password input
 function writePassword() {
@@ -17,88 +84,7 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
-
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
-
-
-function generatePassword() {
-  var passwordLength = prompt("How many characters (between 12-128) would you like in your password?")
-
-  var lowerCase = confirm("lowercase letters?")
-
-  var upperCase = confirm("UPPERCASE LETTERS?")
-
-  var numbers = confirm("Numb3r5?")
-
-  var specials = confirm("Special characters?")
-
-  // why?
-  var minimumCount = 0
-
-
-// why?
-  var minimumNumbers = ""
-  var minimumLowerCases = ""
-  var minimumUpperCases = ""
-  var minimumSpecialCharacters = ""
-
-
-// does this even work? I see an example with numbers that seem arbitrary
-  var functionArray = {
-    lowerCharacters: function() {
-      return String.fromCharCode(Math.floor(Math.random))
-    },
-
-    upperCharacters: function() {
-      return String.fromCharCode(Math.floor(Math.random))
-    },
-
-    numberCharacters: function() {
-      return String.fromCharCode(Math.floor(Math.random))
-    },
-
-    specialCharacters: function() {
-      return String.fromCharCode(Math.floor(Math.random))
-    }
-  }
-
-if (lowerCase === true) {
-  minimumNumbers = functionArray.lowerCharacters()
-  minimumCount++
-}
-
-if (upperCase === true) {
-  minimumNumbers = functionArray.upperCharacters()
-  minimumCount++
-}
-
-if (numbers === true) {
-  minimumNumbers = functionArray.numberCharacters()
-  minimumCount++
-}
-
-if (specials === true) {
-  minimumNumbers = functionArray.specialCharacters()
-  minimumCount++
-}
-
-var randomPasswordGenerated = ""
-
-for (var i =0; i <= (parseInt(passwordLength) - minimumCount); i++ ) {
-  var randomNumberPicked = Math.floor(Math.random())
-
-  randomPasswordGenerated += randomNumberPicked
-}
-
-// what even is this?
-randomPasswordGenerated += minimumLowerCases
-randomPasswordGenerated += minimumUpperCases
-randomPasswordGenerated += minimumNumbers
-randomPasswordGenerated += minimumSpecialCharacters
-
-return randomPasswordGenerated
-
-}
